@@ -1,0 +1,33 @@
+[package]
+name = "ai-pr-reviewer"
+version = "0.0.1"
+edition = "2021"
+authors = ["Dhia <dhia@example.com>"]
+description = "AI PR Reviewer (AI-Debt Governor) intercepts low-quality AI-generated code diffs to prevent review fatigue."
+repository = "https://github.com/dhia-bechattaoui/ai-pr-reviewer"
+license = "MIT OR Apache-2.0"
+keywords = ["cli", "git", "pr-review", "ai", "static-analysis"]
+categories = ["command-line-utilities", "development-tools"]
+exclude = [
+    ".agents/*",
+    "plan.md",
+    ".github/*",
+    "tests/*",
+]
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+opt-level = 0
+debug = true
